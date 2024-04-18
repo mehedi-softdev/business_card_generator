@@ -1,6 +1,6 @@
+
 import 'package:business_card_gen/models/business_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class BusinessCardInfo extends StatefulWidget {
   const BusinessCardInfo({super.key});
@@ -10,12 +10,6 @@ class BusinessCardInfo extends StatefulWidget {
 }
 
 class _BusinessCardInfoState extends State<BusinessCardInfo> {
-  String? businessName;
-  String? userName;
-  String? contactNumber;
-  String? email, address;
-  String? businessNameError, userNameError, contactNumberError;
-  String? emailError, addressError;
 
   @override
   Widget build(BuildContext context) {
@@ -94,180 +88,421 @@ class _CardInfoDesignState extends State<CardInfoDesign> {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
+    final screenWidth = MediaQuery.sizeOf(context).width;
     final itemWidth = screenWidth > 600 ? 400.0 : screenWidth * 0.8;
 
-    return SingleChildScrollView(
-      child: Center(
-        child: Container(
-          margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
-          child: Column(
-            children: [
-              // error message box
-              if(!_isValid) SizedBox(
-                width: itemWidth,
-                child: Center(
-                  child: Text(
-                    _errorMessage,
-                    style: const TextStyle(
-                      color: Colors.redAccent,
-                      fontStyle: FontStyle.italic,
-                      fontSize: 16.0,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth > 900) {
+          return SingleChildScrollView(
+            child: Center(
+              child: Container(
+                margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                child: Column(
+                  children: [
+                    // error message box
+                    if(!_isValid) SizedBox(
+                      width: itemWidth,
+                      child: Center(
+                        child: Text(
+                          _errorMessage,
+                          style: const TextStyle(
+                            color: Colors.redAccent,
+                            fontStyle: FontStyle.italic,
+                            fontSize: 16.0,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    SizedBox(
+                      width: itemWidth + 200,
+                      child: Row(
+                        children: [
+                          // Business Name Field
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.all(5.0),
+                              width: itemWidth,
+                              child: TextField(
+                                controller: _businessNameText,
+                                keyboardType: TextInputType.text,
+                                decoration: const InputDecoration(
+                                  prefixIcon: Icon(Icons.business),
+                                  hintText: 'Business Name',
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 2,
+                                      color: Colors.grey,
+                                    ),
+                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 2,
+                                      color: Colors.lightGreen,
+                                    ),
+                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          // Card Holder Name Field
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.all(5.0),
+                              width: itemWidth,
+                              child: TextField(
+                                controller: _cardHolderNameText,
+                                keyboardType: TextInputType.text,
+                                decoration: const InputDecoration(
+                                  prefixIcon: Icon(Icons.person),
+                                  hintText: 'Card Holder Name',
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 2,
+                                      color: Colors.grey,
+                                    ),
+                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 2,
+                                      color: Colors.lightGreen,
+                                    ),
+                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: itemWidth + 200,
+                      child: Row(
+                        children: [
+                          // Card Holder Email Field
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.all(5.0),
+                              width: itemWidth,
+                              child: TextField(
+                                controller: _cardHolderEmailText,
+                                keyboardType: TextInputType.emailAddress,
+                                decoration: const InputDecoration(
+                                  prefixIcon: Icon(Icons.email),
+                                  hintText: 'Card Holder Email',
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 2,
+                                      color: Colors.grey,
+                                    ),
+                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 2,
+                                      color: Colors.lightGreen,
+                                    ),
+                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          // Card Holder Contact Number Field
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.all(5.0),
+                              width: itemWidth,
+                              child: TextField(
+                                controller: _contactNumberText,
+                                keyboardType: TextInputType.phone,
+                                decoration: const InputDecoration(
+                                  prefixIcon: Icon(Icons.phone),
+                                  hintText: 'Phone Number',
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 2,
+                                      color: Colors.grey,
+                                    ),
+                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 2,
+                                      color: Colors.lightGreen,
+                                    ),
+                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: itemWidth + 200,
+                      child: Row(
+                        children: [
+                          // Business Address Field
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.all(5.0),
+                              width: itemWidth,
+                              child: TextField(
+                                controller: _addressText,
+                                keyboardType: TextInputType.text,
+                                decoration: const InputDecoration(
+                                  prefixIcon: Icon(Icons.place),
+                                  hintText: 'Business Address',
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 2,
+                                      color: Colors.grey,
+                                    ),
+                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 2,
+                                      color: Colors.lightGreen,
+                                    ),
+                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const Expanded(child: SizedBox(width: 300,)),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: itemWidth + 200,
+                      child: Row(
+                        children: [
+                          const Expanded(child: SizedBox(width: 300,)),
+                          // Form Buttons area
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.all(5.0),
+                              width: itemWidth,
+                              height: 40.0,
+                              child: FilledButton(
+                                style: FilledButton.styleFrom(
+                                  backgroundColor: Colors.lightGreen,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                  ),
+                                ),
+                                onPressed: _generateButtonEvent,
+                                child: const Text("Generate"),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               ),
-              // Business Name Field
-              Container(
-                margin: const EdgeInsets.all(5.0),
-                width: itemWidth,
-                child: TextField(
-                  controller: _businessNameText,
-                  keyboardType: TextInputType.text,
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.business),
-                    hintText: 'Business Name',
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        width: 2,
-                        color: Colors.grey,
+            ),
+          );
+        } else {
+          // element by element for all other screens
+          return SingleChildScrollView(
+            child: Center(
+              child: Container(
+                margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                child: Column(
+                  children: [
+                    // error message box
+                    if (!_isValid)
+                      SizedBox(
+                        width: itemWidth,
+                        child: Center(
+                          child: Text(
+                            _errorMessage,
+                            style: const TextStyle(
+                              color: Colors.redAccent,
+                              fontStyle: FontStyle.italic,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                        ),
                       ),
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        width: 2,
-                        color: Colors.lightGreen,
+                    // Business Name Field
+                    Container(
+                      margin: const EdgeInsets.all(5.0),
+                      width: itemWidth,
+                      child: TextField(
+                        controller: _businessNameText,
+                        keyboardType: TextInputType.text,
+                        decoration: const InputDecoration(
+                          prefixIcon: Icon(Icons.business),
+                          hintText: 'Business Name',
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 2,
+                              color: Colors.grey,
+                            ),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 2,
+                              color: Colors.lightGreen,
+                            ),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                          ),
+                        ),
                       ),
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
                     ),
-                  ),
+                    // Card Holder Name Field
+                    Container(
+                      margin: const EdgeInsets.all(5.0),
+                      width: itemWidth,
+                      child: TextField(
+                        controller: _cardHolderNameText,
+                        keyboardType: TextInputType.text,
+                        decoration: const InputDecoration(
+                          prefixIcon: Icon(Icons.person),
+                          hintText: 'Card Holder Name',
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 2,
+                              color: Colors.grey,
+                            ),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 2,
+                              color: Colors.lightGreen,
+                            ),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                          ),
+                        ),
+                      ),
+                    ),
+                    // Card Holder Email Field
+                    Container(
+                      margin: const EdgeInsets.all(5.0),
+                      width: itemWidth,
+                      child: TextField(
+                        controller: _cardHolderEmailText,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: const InputDecoration(
+                          prefixIcon: Icon(Icons.email),
+                          hintText: 'Card Holder Email',
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 2,
+                              color: Colors.grey,
+                            ),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 2,
+                              color: Colors.lightGreen,
+                            ),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                          ),
+                        ),
+                      ),
+                    ),
+                    // Card Holder Contact Number Field
+                    Container(
+                      margin: const EdgeInsets.all(5.0),
+                      width: itemWidth,
+                      child: TextField(
+                        controller: _contactNumberText,
+                        keyboardType: TextInputType.phone,
+                        decoration: const InputDecoration(
+                          prefixIcon: Icon(Icons.phone),
+                          hintText: 'Phone Number',
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 2,
+                              color: Colors.grey,
+                            ),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 2,
+                              color: Colors.lightGreen,
+                            ),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                          ),
+                        ),
+                      ),
+                    ),
+                    // Business Address Field
+                    Container(
+                      margin: const EdgeInsets.all(5.0),
+                      width: itemWidth,
+                      child: TextField(
+                        controller: _addressText,
+                        keyboardType: TextInputType.text,
+                        decoration: const InputDecoration(
+                          prefixIcon: Icon(Icons.place),
+                          hintText: 'Business Address',
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 2,
+                              color: Colors.grey,
+                            ),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 2,
+                              color: Colors.lightGreen,
+                            ),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                          ),
+                        ),
+                      ),
+                    ),
+                    // Form Buttons area
+                    Container(
+                      margin: const EdgeInsets.all(5.0),
+                      width: itemWidth,
+                      height: 40.0,
+                      child: FilledButton(
+                        style: FilledButton.styleFrom(
+                          backgroundColor: Colors.lightGreen,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                          ),
+                        ),
+                        onPressed: _generateButtonEvent,
+                        child: const Text("Generate"),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              // Card Holder Name Field
-              Container(
-                margin: const EdgeInsets.all(5.0),
-                width: itemWidth,
-                child: TextField(
-                  controller: _cardHolderNameText,
-                  keyboardType: TextInputType.text,
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person),
-                    hintText: 'Card Holder Name',
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        width: 2,
-                        color: Colors.grey,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        width: 2,
-                        color: Colors.lightGreen,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    ),
-                  ),
-                ),
-              ),
-              // Card Holder Email Field
-              Container(
-                margin: const EdgeInsets.all(5.0),
-                width: itemWidth,
-                child: TextField(
-                  controller: _cardHolderEmailText,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.email),
-                    hintText: 'Card Holder Email',
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        width: 2,
-                        color: Colors.grey,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        width: 2,
-                        color: Colors.lightGreen,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    ),
-                  ),
-                ),
-              ),
-              // Card Holder Contact Number Field
-              Container(
-                margin: const EdgeInsets.all(5.0),
-                width: itemWidth,
-                child: TextField(
-                  controller: _contactNumberText,
-                  keyboardType: TextInputType.phone,
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.phone),
-                    hintText: 'Phone Number',
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        width: 2,
-                        color: Colors.grey,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        width: 2,
-                        color: Colors.lightGreen,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    ),
-                  ),
-                ),
-              ),
-              // Business Address Field
-              Container(
-                margin: const EdgeInsets.all(5.0),
-                width: itemWidth,
-                child: TextField(
-                  controller: _addressText,
-                  keyboardType: TextInputType.text,
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.place),
-                    hintText: 'Business Address',
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        width: 2,
-                        color: Colors.grey,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        width: 2,
-                        color: Colors.lightGreen,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    ),
-                  ),
-                ),
-              ),
-              // Form Buttons area
-              Container(
-                margin: const EdgeInsets.all(5.0),
-                width: itemWidth,
-                child: FilledButton(
-                  style: FilledButton.styleFrom(
-                    backgroundColor: Colors.lightGreen,
-                  ),
-                  onPressed: _generateButtonEvent,
-                  child: const Text("Generate"),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
+            ),
+          );
+        }
+      },
     );
   }
 }
