@@ -1,4 +1,6 @@
+import 'package:business_card_gen/models/business_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class BusinessCardInfo extends StatefulWidget {
   const BusinessCardInfo({super.key});
@@ -46,59 +48,223 @@ class CardInfoDesign extends StatefulWidget {
 }
 
 class _CardInfoDesignState extends State<CardInfoDesign> {
+  // controllers
+  final TextEditingController _businessNameText = TextEditingController();
+  final TextEditingController _cardHolderNameText = TextEditingController();
+  final TextEditingController _contactNumberText = TextEditingController();
+  final TextEditingController _cardHolderEmailText = TextEditingController();
+  final TextEditingController _addressText = TextEditingController();
+  bool _isValid = true;
+  String _errorMessage = '';
+
+  void _generateButtonEvent() {
+    BusinessCard businessCard = BusinessCard(
+      businessName: _businessNameText.text.toString(),
+      cardHolderName: _cardHolderNameText.text.toString(),
+      cardHolderEmail: _cardHolderEmailText.text.toString(),
+      contactNumber: _contactNumberText.text.toString(),
+      businessAddress: _addressText.text.toString(),
+    );
+    // validating
+    if (!_isInputValid(businessCard)) {
+      setState(() {
+        _errorMessage = "Please fill all the field";
+        _isValid = false;
+      });
+      return;
+    }
+    print("Lapa lap");
+  }
+
+  bool _isInputValid(BusinessCard businessCard) {
+    if (businessCard.businessName.isEmpty) {
+      return false;
+    } else if (businessCard.cardHolderName.isEmpty) {
+      return false;
+    } else if (businessCard.cardHolderEmail.isEmpty) {
+      return false;
+    } else if (businessCard.contactNumber.isEmpty) {
+      return false;
+    } else if (businessCard.businessAddress.isEmpty) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        // Business Name Field
-        Container(
-          margin: const EdgeInsets.all(5.0),
-          width: 300,
-          child: const TextField(
-            decoration: InputDecoration(
-              hintText: 'Business Name',
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  width: 2,
-                  color: Colors.grey,
+    return SingleChildScrollView(
+      child: Center(
+        child: Container(
+          margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+          child: Column(
+            children: [
+              // error message box
+              if(!_isValid) SizedBox(
+                width: 300,
+                child: Center(
+                  child: Text(
+                    _errorMessage,
+                    style: const TextStyle(
+                      color: Colors.redAccent,
+                      fontStyle: FontStyle.italic,
+                      fontSize: 16.0,
+                    ),
+                  ),
                 ),
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
               ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  width: 2,
-                  color: Colors.lightGreen,
+              // Business Name Field
+              Container(
+                margin: const EdgeInsets.all(5.0),
+                width: 300,
+                child: TextField(
+                  controller: _businessNameText,
+                  keyboardType: TextInputType.text,
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.business),
+                    hintText: 'Business Name',
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: Colors.grey,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: Colors.lightGreen,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                  ),
                 ),
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
               ),
-            ),
+              // Card Holder Name Field
+              Container(
+                margin: const EdgeInsets.all(5.0),
+                width: 300,
+                child: TextField(
+                  controller: _cardHolderNameText,
+                  keyboardType: TextInputType.text,
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.person),
+                    hintText: 'Card Holder Name',
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: Colors.grey,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: Colors.lightGreen,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                  ),
+                ),
+              ),
+              // Card Holder Email Field
+              Container(
+                margin: const EdgeInsets.all(5.0),
+                width: 300,
+                child: TextField(
+                  controller: _cardHolderEmailText,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.email),
+                    hintText: 'Card Holder Email',
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: Colors.grey,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: Colors.lightGreen,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                  ),
+                ),
+              ),
+              // Card Holder Contact Number Field
+              Container(
+                margin: const EdgeInsets.all(5.0),
+                width: 300,
+                child: TextField(
+                  controller: _contactNumberText,
+                  keyboardType: TextInputType.phone,
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.phone),
+                    hintText: 'Phone Number',
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: Colors.grey,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: Colors.lightGreen,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                  ),
+                ),
+              ),
+              // Business Address Field
+              Container(
+                margin: const EdgeInsets.all(5.0),
+                width: 300,
+                child: TextField(
+                  controller: _addressText,
+                  keyboardType: TextInputType.text,
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.place),
+                    hintText: 'Business Address',
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: Colors.grey,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: Colors.lightGreen,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                  ),
+                ),
+              ),
+              // Form Buttons area
+              Container(
+                margin: const EdgeInsets.all(5.0),
+                width: 300,
+                child: FilledButton(
+                  style: FilledButton.styleFrom(
+                    backgroundColor: Colors.lightGreen,
+                  ),
+                  onPressed: _generateButtonEvent,
+                  child: const Text("Generate"),
+                ),
+              )
+            ],
           ),
         ),
-        Container(
-          margin: const EdgeInsets.all(5.0),
-          width: 300,
-          child: const TextField(
-            decoration: InputDecoration(
-              hintText: 'Your Name',
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  width: 2,
-                  color: Colors.grey,
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  width: 2,
-                  color: Colors.lightGreen,
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              ),
-            ),
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
