@@ -94,6 +94,9 @@ class _CardInfoDesignState extends State<CardInfoDesign> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final itemWidth = screenWidth > 600 ? 400.0 : screenWidth * 0.8;
+
     return SingleChildScrollView(
       child: Center(
         child: Container(
@@ -102,7 +105,7 @@ class _CardInfoDesignState extends State<CardInfoDesign> {
             children: [
               // error message box
               if(!_isValid) SizedBox(
-                width: 300,
+                width: itemWidth,
                 child: Center(
                   child: Text(
                     _errorMessage,
@@ -117,7 +120,7 @@ class _CardInfoDesignState extends State<CardInfoDesign> {
               // Business Name Field
               Container(
                 margin: const EdgeInsets.all(5.0),
-                width: 300,
+                width: itemWidth,
                 child: TextField(
                   controller: _businessNameText,
                   keyboardType: TextInputType.text,
@@ -144,7 +147,7 @@ class _CardInfoDesignState extends State<CardInfoDesign> {
               // Card Holder Name Field
               Container(
                 margin: const EdgeInsets.all(5.0),
-                width: 300,
+                width: itemWidth,
                 child: TextField(
                   controller: _cardHolderNameText,
                   keyboardType: TextInputType.text,
@@ -171,7 +174,7 @@ class _CardInfoDesignState extends State<CardInfoDesign> {
               // Card Holder Email Field
               Container(
                 margin: const EdgeInsets.all(5.0),
-                width: 300,
+                width: itemWidth,
                 child: TextField(
                   controller: _cardHolderEmailText,
                   keyboardType: TextInputType.emailAddress,
@@ -198,7 +201,7 @@ class _CardInfoDesignState extends State<CardInfoDesign> {
               // Card Holder Contact Number Field
               Container(
                 margin: const EdgeInsets.all(5.0),
-                width: 300,
+                width: itemWidth,
                 child: TextField(
                   controller: _contactNumberText,
                   keyboardType: TextInputType.phone,
@@ -225,7 +228,7 @@ class _CardInfoDesignState extends State<CardInfoDesign> {
               // Business Address Field
               Container(
                 margin: const EdgeInsets.all(5.0),
-                width: 300,
+                width: itemWidth,
                 child: TextField(
                   controller: _addressText,
                   keyboardType: TextInputType.text,
@@ -252,7 +255,7 @@ class _CardInfoDesignState extends State<CardInfoDesign> {
               // Form Buttons area
               Container(
                 margin: const EdgeInsets.all(5.0),
-                width: 300,
+                width: itemWidth,
                 child: FilledButton(
                   style: FilledButton.styleFrom(
                     backgroundColor: Colors.lightGreen,
