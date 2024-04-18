@@ -1,15 +1,15 @@
-
 import 'package:business_card_gen/models/business_card.dart';
+import 'package:business_card_gen/utils/business_card_routes.dart';
 import 'package:flutter/material.dart';
 
-class BusinessCardInfo extends StatefulWidget {
-  const BusinessCardInfo({super.key});
+class BusinessCardInfoPage extends StatefulWidget {
+  const BusinessCardInfoPage({super.key});
 
   @override
-  State<BusinessCardInfo> createState() => _BusinessCardInfoState();
+  State<BusinessCardInfoPage> createState() => _BusinessCardInfoPageState();
 }
 
-class _BusinessCardInfoState extends State<BusinessCardInfo> {
+class _BusinessCardInfoPageState extends State<BusinessCardInfoPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,8 @@ class _CardInfoDesignState extends State<CardInfoDesign> {
       });
       return;
     }
-    print("Lapa lap");
+    // now navigate to card Template page
+    Navigator.pushNamed(context, BCRoutes.cardTemplate.route);
   }
 
   bool _isInputValid(BusinessCard businessCard) {
