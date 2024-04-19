@@ -10,7 +10,6 @@ class BusinessCardInfoPage extends StatefulWidget {
 }
 
 class _BusinessCardInfoPageState extends State<BusinessCardInfoPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +67,8 @@ class _CardInfoDesignState extends State<CardInfoDesign> {
       return;
     }
     // now navigate to card Template page
-    Navigator.pushNamed(context, BCRoutes.cardTemplate.route);
+    Navigator.pushNamed(context, BCRoutes.cardTemplate.route,
+        arguments: businessCard);
   }
 
   bool _isInputValid(BusinessCard businessCard) {
@@ -102,19 +102,20 @@ class _CardInfoDesignState extends State<CardInfoDesign> {
                 child: Column(
                   children: [
                     // error message box
-                    if(!_isValid) SizedBox(
-                      width: itemWidth,
-                      child: Center(
-                        child: Text(
-                          _errorMessage,
-                          style: const TextStyle(
-                            color: Colors.redAccent,
-                            fontStyle: FontStyle.italic,
-                            fontSize: 16.0,
+                    if (!_isValid)
+                      SizedBox(
+                        width: itemWidth,
+                        child: Center(
+                          child: Text(
+                            _errorMessage,
+                            style: const TextStyle(
+                              color: Colors.redAccent,
+                              fontStyle: FontStyle.italic,
+                              fontSize: 16.0,
+                            ),
                           ),
                         ),
                       ),
-                    ),
                     SizedBox(
                       width: itemWidth + 200,
                       child: Row(
@@ -135,14 +136,16 @@ class _CardInfoDesignState extends State<CardInfoDesign> {
                                       width: 2,
                                       color: Colors.grey,
                                     ),
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       width: 2,
                                       color: Colors.lightGreen,
                                     ),
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                   ),
                                 ),
                               ),
@@ -164,14 +167,16 @@ class _CardInfoDesignState extends State<CardInfoDesign> {
                                       width: 2,
                                       color: Colors.grey,
                                     ),
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       width: 2,
                                       color: Colors.lightGreen,
                                     ),
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                   ),
                                 ),
                               ),
@@ -200,14 +205,16 @@ class _CardInfoDesignState extends State<CardInfoDesign> {
                                       width: 2,
                                       color: Colors.grey,
                                     ),
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       width: 2,
                                       color: Colors.lightGreen,
                                     ),
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                   ),
                                 ),
                               ),
@@ -229,14 +236,16 @@ class _CardInfoDesignState extends State<CardInfoDesign> {
                                       width: 2,
                                       color: Colors.grey,
                                     ),
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       width: 2,
                                       color: Colors.lightGreen,
                                     ),
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                   ),
                                 ),
                               ),
@@ -265,20 +274,25 @@ class _CardInfoDesignState extends State<CardInfoDesign> {
                                       width: 2,
                                       color: Colors.grey,
                                     ),
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       width: 2,
                                       color: Colors.lightGreen,
                                     ),
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                          const Expanded(child: SizedBox(width: 300,)),
+                          const Expanded(
+                              child: SizedBox(
+                            width: 300,
+                          )),
                         ],
                       ),
                     ),
@@ -286,7 +300,10 @@ class _CardInfoDesignState extends State<CardInfoDesign> {
                       width: itemWidth + 200,
                       child: Row(
                         children: [
-                          const Expanded(child: SizedBox(width: 300,)),
+                          const Expanded(
+                              child: SizedBox(
+                            width: 300,
+                          )),
                           // Form Buttons area
                           Expanded(
                             child: Container(
@@ -297,7 +314,8 @@ class _CardInfoDesignState extends State<CardInfoDesign> {
                                 style: FilledButton.styleFrom(
                                   backgroundColor: Colors.lightGreen,
                                   shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5.0)),
                                   ),
                                 ),
                                 onPressed: _generateButtonEvent,
@@ -490,7 +508,8 @@ class _CardInfoDesignState extends State<CardInfoDesign> {
                         style: FilledButton.styleFrom(
                           backgroundColor: Colors.lightGreen,
                           shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(5.0)),
                           ),
                         ),
                         onPressed: _generateButtonEvent,
