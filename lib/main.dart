@@ -19,7 +19,6 @@ class BusinessCardsApp extends StatelessWidget {
         primarySwatch: Colors.lightGreen,
         brightness: Brightness.light,
       ),
-      initialRoute: BCRoutes.cardTemplate.route,
       routes: {
         "/" : (context) => const BusinessCardInfoPage(),
         BCRoutes.cardInfo.route : (context) => const BusinessCardInfoPage(),
